@@ -1,10 +1,10 @@
 import React from "react";
 
 function Footer() {
-  const year = new Date().getFullYear();
+  const currentYear = new Date().getFullYear();
   return (
     <footer>
-      <p>Copyright ⓒ {year}</p>
+      <p>Copyright © {currentYear} Sticky Notes App. All rights reserved.</p>
     </footer>
   );
 }
