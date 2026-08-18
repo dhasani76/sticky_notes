@@ -10,8 +10,6 @@ A full-stack React sticky notes application built with **React 18**, **Vite**, *
 - ✏️ **Inline Editing**: Click the edit icon on any note card to update titles and content.
 - 🎨 **Color Themes**: Customize note backgrounds using 5 color themes (Yellow, Green, Blue, Pink, and Orange).
 - 🔍 **Real-Time Search**: Search through your notes by title or content keywords from the header bar.
-- 💾 **Backend Persistent Storage**: All notes automatically sync and persist in the Node.js Express server database (`server/data/notes.json`).
-- 📱 **Responsive Grid Layout**: CSS Grid layout (`auto-fill`) with hover micro-animations and sticky footer.
 - ♿ **Accessible**: Includes ARIA labels and focus management for keyboard and screen reader accessibility.
 
 ---
