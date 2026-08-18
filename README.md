@@ -1,6 +1,6 @@
 # 📝 Sticky Notes App
 
-A React sticky notes application built with **React 18**, **Vite**, and **Material-UI**.
+A full-stack React sticky notes application built with **React 18**, **Vite**, **Express**, and **Material-UI**.
 
 ---
 
@@ -9,8 +9,8 @@ A React sticky notes application built with **React 18**, **Vite**, and **Materi
 - 📌 **Create & Delete Notes**: Easily add notes with titles and content.
 - ✏️ **Inline Editing**: Click the edit icon on any note card to update titles and content.
 - 🎨 **Color Themes**: Customize note backgrounds using 5 color themes (Yellow, Green, Blue, Pink, and Orange).
-- 🔍 **Real-Time Search**: Search through your notes instantly by title or content keywords from the header bar.
-- 💾 **Persistent Storage**: All notes automatically sync to browser `localStorage` so your data persists across page reloads.
+- 🔍 **Real-Time Search**: Search through your notes by title or content keywords from the header bar.
+- 💾 **Backend Persistent Storage**: All notes automatically sync and persist in the Node.js Express server database (`server/data/notes.json`).
 - 📱 **Responsive Grid Layout**: CSS Grid layout (`auto-fill`) with hover micro-animations and sticky footer.
 - ♿ **Accessible**: Includes ARIA labels and focus management for keyboard and screen reader accessibility.
 
@@ -19,9 +19,25 @@ A React sticky notes application built with **React 18**, **Vite**, and **Materi
 ## 🛠️ Tech Stack
 
 - **Frontend Library**: [React 18](https://react.dev/)
-- **Build Tool**: [Vite](https://vitejs.dev/)
+- **Backend Server**: [Express.js](https://expressjs.com/) (Node.js REST API)
+- **Database / Persistence**: JSON storage engine (`server/data/notes.json`)
+- **Build Tool**: [Vite](https://vitejs.dev/) with Proxy
 - **UI Components & Icons**: [Material-UI (MUI v6)](https://mui.com/)
 - **Styling**: CSS3 (Variables, Grid, Flexbox, Animations)
+
+---
+
+## 🔌 API Endpoints
+
+The backend server exposes the following REST API endpoints under `/api/notes`:
+
+| Method | Endpoint | Description |
+| :--- | :--- | :--- |
+| `GET` | `/api/notes` | Retrieves all saved notes |
+| `POST` | `/api/notes` | Creates a new note (`{ title, content, color }`) |
+| `PUT` | `/api/notes/:id` | Updates an existing note by ID |
+| `DELETE` | `/api/notes/:id` | Deletes a note by ID |
+| `POST` | `/api/notes/sync` | Bulk synchronizes notes |
 
 ---
 
@@ -45,7 +61,7 @@ Ensure you have [Node.js](https://nodejs.org/) (v16+ recommended) installed on y
 
 ### Running Locally
 
-Start the Vite development server:
+Start both the Node.js backend server and Vite frontend server concurrently:
 ```bash
 npm run dev
 ```
@@ -60,8 +76,9 @@ In the project directory, you can run:
 
 | Command | Description |
 | :--- | :--- |
-| `npm run dev` | Runs the app in development mode with instant HMR. |
-| `npm run build` | Builds the app for production to the `dist` folder. |
+| `npm run dev` | Runs both the Express server (port 5000) and Vite dev server (port 5173) concurrently. |
+| `npm run server` | Runs only the Node.js Express backend server. |
+| `npm run build` | Builds the frontend app for production to the `dist` folder. |
 | `npm run preview` | Locally previews the production build. |
 
 ---
@@ -71,14 +88,19 @@ In the project directory, you can run:
 ```text
 sticky_notes/
 ├── index.html            # Vite HTML entry point
-├── vite.config.js        # Vite configuration
+├── vite.config.js        # Vite configuration with API proxy
 ├── package.json          # Package dependencies & scripts
 ├── public/               # Static assets
+├── server/
+│   ├── index.js          # Express REST API server
+│   └── data/
+│       └── notes.json    # Disk database storing saved notes
 └── src/
     ├── index.jsx         # React application root
+    ├── api.js            # Frontend HTTP client helper for backend REST API
     ├── styles.css        # Modern CSS design system & utility classes
     └── components/
-        ├── App.jsx       # Main application layout & persistent state
+        ├── App.jsx       # Main application layout & backend state integration
         ├── Header.jsx    # Branding header & search bar
         ├── CreateArea.jsx# Note input form & color selector
         ├── Note.jsx      # Sticky note card with inline editing

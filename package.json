@@ -4,7 +4,9 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "concurrently \"node server/index.js\" \"vite\"",
+    "server": "node server/index.js",
+    "start": "node server/index.js",
     "build": "vite build",
     "preview": "vite preview"
   },
@@ -13,6 +15,9 @@
     "@emotion/styled": "^11.13.0",
     "@mui/icons-material": "^6.1.10",
     "@mui/material": "^6.1.10",
+    "concurrently": "^10.0.5",
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },
